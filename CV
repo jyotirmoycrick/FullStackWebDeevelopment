@@ -70,34 +70,33 @@
 <div class="container">
     <header>
         <h1>Jyotirmoy Malo</h1>
-        <p>Android Developer and Problem Solver</p>
+        <p>Web Developer and Problem Solver</p>
     </header>
 
     <div class="contact-info">
-        <p>Phone: +91-6297536783</p>
-        <p>Email: somriksur@gmail.com</p>
+        <p>Phone: +91-8240819680</p>
+        <p>Email: malojyotirmoy@gmail.com</p>
         <p>Barasat, North 24 Pargana, 700126</p>
     </div>
 
     <section class="summary">
         <h2>Summary</h2>
-        <p>To secure an internship position as an Android Developer where I can leverage my solid foundation in Computer Science and passion for mobile application development. Eager to apply my skills in Java and Android Studio to contribute to innovative projects while gaining practical experience in a professional environment. Committed to continuous learning and adapting to emerging technologies, I aim to contribute effectively to the team, drive results, and advance my career in the dynamic field of software development.</p>
+        <p>To secure an internship position as an Android Developer where I can leverage my solid foundation in Computer Science and passion for mobile application development. Eager to apply my skills in Full Stack Development to contribute to innovative projects while gaining practical experience in a professional environment. Committed to continuous learning and adapting to emerging technologies, I aim to contribute effectively to the team, drive results, and advance my career in the dynamic field of software development.</p>
     </section>
 
     <section class="education">
         <h2>Education</h2>
         <ul>
             <li><strong>Adamas University</strong> - Bachelor's Degree in Computer Science and Engineering (2020 - 2026)</li>
-            <li><strong>Sankoa CG High School</strong> - Secondary and Higher Secondary (2014 - 2022)</li>
+            <li><strong>Ichapur High School </strong> - Secondary and Higher Secondary (2014 - 2022)</li>
         </ul>
     </section>
 
     <section class="experience">
         <h2>Work Experience</h2>
         <ul>
-            <li><strong>Student Member</strong> - Adamas University Robotics and AI Club (2022 - Present)</li>
-            <li>My initial project with the robotics club involved creating a vacuum cleaner robot equipped with obstacle detection capabilities.</li>
-            <li>Currently, I'm focused on developing a Smart Wheelchair, and progress is underway.</li>
+            <li>My initial project with the robotics club involved creating a Coding Website.</li>
+            <li>Currently, I'm focused on developing a Food Delivery Management System, and progress is underway.</li>
         </ul>
     </section>
 
@@ -107,8 +106,7 @@
             <li>Java (OOP)</li>
             <li>C++ (OOP)</li>
             <li>Version Control</li>
-            <li>Android SDK</li>
-            <li>Arduino (Tinkercad)</li>
+            <li>Web3</li>
             <li>Data Structures</li>
             <li>Competitive Programming</li>
         </ul>
@@ -117,10 +115,10 @@
     <section class="projects">
         <h2>Projects</h2>
         <ul>
-            <li><strong>Android Developer</strong> (2022 - Present)</li>
-            <li>My first project is a Tic-Tac-Toe game you can play offline with friends on one phone. It’s all set up and working well.</li>
-            <li>Next, I made a to-do list app where you can save notes in different ways like photos, letters, sketches, and PDFs. It’s all ready to use.</li>
-            <li>Right now, I'm working on a Food Delivery System. It's coming along nicely, and I'm focused on making it efficient and user-friendly.</li>
+            <li><strong>Full Stack Developer</strong> (2022 - Present)</li>
+            <li>My first project is a Snake game you can play offline with friends on one phone. It’s all set up and working well.</li>
+            <li>Next, I made a Food Delivery System</li>
+            <li>Right now, I'm working on a AI Bot. It's coming along nicely, and I'm focused on making it efficient and user-friendly.</li>
         </ul>
     </section>
 
@@ -130,7 +128,6 @@
             <li>IBM Certified in Enterprise Design Thinking</li>
             <li>Two-time Participant, Adamas University Tech Fest</li>
             <li>Smart India Hackathon Internal Hackathon Champion</li>
-            <li>Agora College Alpha Certified in Java</li>
         </ul>
     </section>
 </div>
