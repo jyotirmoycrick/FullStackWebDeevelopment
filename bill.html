@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Sales and Service - Revenue Management</title>
+    <style>
+       body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 2.5rem;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 20px 20px;
+}
+
+/* Container */
+.container {
+    width: 85%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+.container:hover {
+    transform: translateY(-10px);
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+    color: #5b86e5;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+    transition: border 0.3s;
+}
+input:focus, select:focus {
+    border: 1px solid #5b86e5;
+    outline: none;
+}
+
+/* Button Styling */
+.btn {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+    margin-right: 10px;
+}
+.btn:hover {
+    background: linear-gradient(90deg, #5b86e5, #36d1dc);
+    box-shadow: 0px 5px 15px rgba(91, 134, 229, 0.4);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+thead {
+    background-color: #5b86e5;
+    color: white;
+}
+
+tbody tr:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);
+    padding: 15px;
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-hidden {
+            display: none;
+        }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+    header {
+        font-size: 2rem;
+    }
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<header>
+    Das Sales and Service - Revenue Management
+</header>
+
+<div class="container">
+    <div class="form-group">
+        <label for="customerName">Customer Name</label>
+        <input type="text" id="customerName" placeholder="Enter customer name">
+    </div>
+
+    <div class="form-group">
+        <label for="customerMobile">Customer Mobile Number</label>
+        <input type="text" id="customerMobile" placeholder="Enter mobile number">
+    </div>
+
+    <div class="form-group">
+        <label for="paymentMode">Payment Mode</label>
+        <select id="paymentMode">
+            <option value="cash">Cash</option>
+            <option value="online">Online</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="serviceType">Service</label>
+        <select id="serviceType" onchange="showServiceFields()">
+            <option value="">Select Service</option>
+            <option value="recharge">Mobile Recharge</option>
+            <option value="sales">Sales and Service</option>
+            <option value="money">Money Withdrawal/Deposit</option>
+        </select>
+    </div>
+
+    <!-- Sales and Service Section -->
+    <div id="salesSection" class="dropdown-hidden">
+        <div class="form-group">
+            <label for="salesServiceName">Sales and Service Name</label>
+            <input type="text" id="salesServiceName" placeholder="Enter sales or service name">
+        </div>
+
+        <div class="form-group">
+            <label for="salesPaymentMode">Payment Mode (Online)</label>
+            <select id="salesPaymentMode">
+                <option value="Cash">Cash</option>
+                <option value="gpay">GPay</option>
+                <option value="phonepe">PhonePe</option>
+                <option value="upi">Other UPI</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="salesAmount">Amount</label>
+            <input type="number" id="salesAmount" placeholder="Enter amount">
+        </div>
+    </div>
+
+    <!-- Recharge Section -->
+    <div id="rechargeSection" class="dropdown-hidden">
+        <div class="form-group">
+            <label for="rechargeMobile">Mobile Number</label>
+            <input type="text" id="rechargeMobile" placeholder="Enter mobile number">
+        </div>
+
+        <div class="form-group">
+            <label for="rechargeOperator">Mobile Operator</label>
+            <select id="rechargeOperator">
+                <option value="jio">Jio</option>
+                <option value="airtel">Airtel</option>
+                <option value="vi">Vi</option>
+                <option value="other">Other Operator</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rechargeAmount">Amount</label>
+            <input type="number" id="rechargeAmount" placeholder="Enter recharge amount">
+        </div>
+    </div>
+
+    <!-- Money Withdrawal/Deposit Section -->
+    <div id="moneySection" class="dropdown-hidden">
+        <div class="form-group">
+            <label for="transactionType">Deposit or Withdrawal</label>
+            <select id="transactionType">
+                <option value="deposit">Deposit</option>
+                <option value="withdrawal">Withdrawal</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="transactionMode">Via</label>
+            <select id="transactionMode">
+                <option value="phonepe">PhonePe</option>
+                <option value="gpay">GPay</option>
+                <option value="spiceMoney">Spice Money</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="transactionAmount">Amount</label>
+            <input type="number" id="transactionAmount" placeholder="Enter transaction amount">
+        </div>
+
+        <div class="form-group">
+            <label for="transactionCommission">Commission</label>
+            <input type="number" id="transactionCommission" placeholder="Commission Will Autometic Calculate" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="transactionEMI">EMI Payment (Optional)</label>
+            <input type="text" id="transactionEMI" value="N/A" placeholder="Enter EMI details (if any)">
+        </div>
+    </div>
+
+    <button class="btn" onclick="submitData()">Submit</button>
+    <button class="btn" onclick="generatePDF()">Summary PDF</button>
+
+
+    <!-- Displaying Entered Data -->
+    <h3>Service Records</h3>
+    <div id="bill-section" >
+    <table>
+        <div class="tableHeading">
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Mobile Number</th>
+                    <th>Service Type</th>
+                    <th>Details</th>
+                    <th>Amount</th>
+                    <th>Payment Mode</th>
+                    <th>Date</th> <!-- New Date Column -->
+                    <th>Options</th>
+                    
+                    
+                </tr>
+            </thead>
+    </div>
+        <tbody id="serviceRecords" >
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+<div class="footer" style="background-color: #45a049; padding: 10px; color: white; text-align: center; font-size: 20px; margin-top: 20px;">
+    <p>Developed By <b>Webdesert Technologies Private Limited India 💖</b></p>
+</div>
+
+
+<script>
+    function showServiceFields() {
+        let serviceType = document.getElementById('serviceType').value;
+        document.getElementById('salesSection').classList.add('dropdown-hidden');
+        document.getElementById('rechargeSection').classList.add('dropdown-hidden');
+        document.getElementById('moneySection').classList.add('dropdown-hidden');
+        
+        if (serviceType === 'sales') {
+            document.getElementById('salesSection').classList.remove('dropdown-hidden');
+        } else if (serviceType === 'recharge') {
+            document.getElementById('rechargeSection').classList.remove('dropdown-hidden');
+        } else if (serviceType === 'money') {
+            document.getElementById('moneySection').classList.remove('dropdown-hidden');
+        }
+    }
+
+    function submitData() {
+    let customerName = document.getElementById('customerName').value;
+    let customerMobile = document.getElementById('customerMobile').value;
+    let paymentMode = document.getElementById('paymentMode').value;
+    let serviceType = document.getElementById('serviceType').value;
+    let currentDate = new Date().toLocaleDateString();  // Get the current date
+
+    let details = '';
+    let amount = 0;
+
+    let uniqueId = new Date().getTime(); // Assign a unique ID based on timestamp
+
+    if (serviceType === 'sales') {
+        let serviceName = document.getElementById('salesServiceName').value;
+        let serviceAmount = document.getElementById('salesAmount').value;
+        let servicePaymentMode = document.getElementById('salesPaymentMode').value;
+        details = `Service: ${serviceName} || Payment Mode: ${servicePaymentMode}`;
+        amount = serviceAmount;
+    } else if (serviceType === 'recharge') {
+        let rechargeMobile = document.getElementById('rechargeMobile').value;
+        let rechargeOperator = document.getElementById('rechargeOperator').value;
+        let rechargeAmount = document.getElementById('rechargeAmount').value;
+        details = `Mobile: ${rechargeMobile} || Operator: ${rechargeOperator}`;
+        amount = rechargeAmount;
+    } else if (serviceType === 'money') {
+        let transactionType = document.getElementById('transactionType').value;
+        let transactionMode = document.getElementById('transactionMode').value;
+        let transactionAmount = parseFloat(document.getElementById('transactionAmount').value);
+        let transactionCommission = calculateCommission(transactionAmount);
+        let transactionEMI = document.getElementById('transactionEMI').value;
+
+        document.getElementById('transactionCommission').value = transactionCommission;
+
+        details = `Type: ${transactionType} || Via: ${transactionMode} || EMI: ${transactionEMI} || Commission: ${transactionCommission}`;
+        amount = transactionAmount;
+    }
+
+    let record = {
+        id: uniqueId, // Assign unique ID
+        customerName: customerName,
+        customerMobile: customerMobile,
+        serviceType: serviceType,
+        details: details,
+        amount: amount,
+        paymentMode: paymentMode,
+        date: currentDate  // Add date to the record
+    };
+
+    // Get the current records from localStorage
+    let storedRecords = JSON.parse(localStorage.getItem('serviceRecords')) || [];
+    storedRecords.push(record);  // Add new record to the stored records
+
+    // Save updated records back to localStorage
+    localStorage.setItem('serviceRecords', JSON.stringify(storedRecords));
+
+    // Update the display table
+    loadStoredRecords();
+}
+
+
+
+function calculateCommission(amount) {
+    if (amount <= 500) {
+        return 5;
+    } else if (amount > 500 && amount <= 1000) {
+        return 10;
+    } else if (amount > 1000 && amount <= 2000) {
+        return 20;
+    } else if (amount > 2000 && amount <= 3000) {
+        return 30;
+    } else if (amount > 3000) {
+        return amount * 0.008; // 0.8% of the amount
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+    function loadStoredRecords() {
+    let storedRecords = JSON.parse(localStorage.getItem('serviceRecords')) || [];
+    let serviceRecords = document.getElementById('serviceRecords');
+    serviceRecords.innerHTML = '';  // Clear any existing rows
+
+    storedRecords.reverse().forEach((record) => {
+        let newRow = serviceRecords.insertRow();
+
+        newRow.insertCell(0).textContent = record.customerName;
+        newRow.insertCell(1).textContent = record.customerMobile;
+        newRow.insertCell(2).textContent = record.serviceType;
+        newRow.insertCell(3).textContent = record.details;
+        newRow.insertCell(4).textContent = record.amount;
+        newRow.insertCell(5).textContent = record.paymentMode;
+        newRow.insertCell(6).textContent = record.date;  // Display the date
+        newRow.insertCell(7).innerHTML = `<button onclick="editRecord(${record.id})">Edit</button> <button onclick="deleteRecord(${record.id})">Delete</button>`;
+    });
+}
+
+
+
+
+
+function editRecord(recordId) {
+    let storedRecords = JSON.parse(localStorage.getItem('serviceRecords')) || [];
+    let record = storedRecords.find(r => r.id === recordId);  // Find record by ID
+
+    // Set the form fields with the current record's values
+    document.getElementById('customerName').value = record.customerName;
+    document.getElementById('customerMobile').value = record.customerMobile;
+    document.getElementById('paymentMode').value = record.paymentMode;
+    document.getElementById('serviceType').value = record.serviceType;
+    showServiceFields(); // Show relevant fields based on serviceType
+
+    // Set specific fields based on service type
+    if (record.serviceType === 'sales') {
+        document.getElementById('salesServiceName').value = record.details.split(' || ')[0].split(': ')[1];
+        document.getElementById('salesAmount').value = record.amount;
+        document.getElementById('salesPaymentMode').value = record.details.split(' || ')[1].split(': ')[1];
+    } else if (record.serviceType === 'recharge') {
+        document.getElementById('rechargeMobile').value = record.details.split(' || ')[0].split(': ')[1];
+        document.getElementById('rechargeOperator').value = record.details.split(' || ')[1].split(': ')[1];
+        document.getElementById('rechargeAmount').value = record.amount;
+    } else if (record.serviceType === 'money') {
+        document.getElementById('transactionAmount').value = record.amount;
+        document.getElementById('transactionType').value = record.details.split(' || ')[0].split(': ')[1];
+        document.getElementById('transactionMode').value = record.details.split(' || ')[1].split(': ')[1];
+        document.getElementById('transactionEMI').value = record.details.split(' || ')[2].split(': ')[1];
+    }
+
+    // Remove the current record to replace it later
+    deleteRecord(recordId);
+}
+    
+
+
+
+    function deleteRecord(recordId) {
+    let storedRecords = JSON.parse(localStorage.getItem('serviceRecords')) || [];
+    
+    // Find and remove the record with the matching ID
+    storedRecords = storedRecords.filter(record => record.id !== recordId);
+    
+    // Save updated records back to localStorage
+    localStorage.setItem('serviceRecords', JSON.stringify(storedRecords));
+    
+    // Reload the table to reflect the changes
+    loadStoredRecords();
+}
+
+
+
+
+
+
+
+
+
+    // Load stored data when the page loads
+    window.onload = function () {
+        loadStoredRecords();
+    }
+
+
+
+
+
+
+
+    
+    function parseDate(input) {
+    const parts = input.split('/');
+    // parts[0] is the day, parts[1] is the month, parts[2] is the year
+    return new Date(parts[2], parts[1] - 1, parts[0]); // month is zero-indexed
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function generatePDF() {
+    const pdfContent = document.createElement('div'); // Create a new div for the PDF content
+    
+    // Add heading to the PDF
+    const heading = document.createElement('h1');
+    heading.textContent = "Das Sales and Services Records";
+    heading.style.textAlign = "center";  // Center the heading
+    pdfContent.appendChild(heading);
+    
+    // Add current date
+    const currentDate = new Date().toLocaleDateString();
+    const dateParagraph = document.createElement('p');
+    dateParagraph.textContent = "Date: " + currentDate;
+    dateParagraph.style.textAlign = "center";  // Center the date
+    pdfContent.appendChild(dateParagraph);
+    
+    // Add a separator
+    const hr = document.createElement('hr');
+    pdfContent.appendChild(hr);
+    
+    // Create a table for the records
+    const table = document.createElement('table');
+    table.style.width = "100%";
+    table.border = "1";
+    
+    // Add table headers
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Customer Name</th>
+            <th>Mobile Number</th>
+            <th>Service Type</th>
+            <th>Details</th>
+            <th>Amount</th>
+            <th>Payment Mode</th>
+            <th>Date</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+    
+    // Add table body
+    const tbody = document.createElement('tbody');
+    table.appendChild(tbody);
+    
+    // Get stored records from localStorage
+    let storedRecords = JSON.parse(localStorage.getItem('serviceRecords')) || [];
+    
+    // Filter today's records
+    let today = new Date().toLocaleDateString();
+    let todayRecords = storedRecords.filter(record => record.date === today);
+    
+    if (todayRecords.length > 0) {
+        todayRecords.forEach(record => {
+            let row = tbody.insertRow();
+            row.insertCell(0).textContent = record.customerName;
+            row.insertCell(1).textContent = record.customerMobile;
+            row.insertCell(2).textContent = record.serviceType;
+            row.insertCell(3).textContent = record.details;
+            row.insertCell(4).textContent = record.amount;
+            row.insertCell(5).textContent = record.paymentMode;
+            row.insertCell(6).textContent = record.date;
+        });
+    } else {
+        // If no records match today's date, show a message
+        let row = tbody.insertRow();
+        let noDataCell = row.insertCell(0);
+        noDataCell.colSpan = 7; // Span across all columns
+        noDataCell.textContent = "No records found for today.";
+        noDataCell.style.textAlign = "center";
+    }
+    
+    // Append the table to the pdfContent div
+    pdfContent.appendChild(table);
+    
+    // Generate PDF
+    html2pdf().from(pdfContent).save();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
